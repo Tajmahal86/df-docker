@@ -158,6 +158,15 @@ if [ -n "$DF_REGISTER_CONTACT" ]; then
   sed -i "s/#DF_REGISTER_CONTACT=/DF_REGISTER_CONTACT=$DF_REGISTER_CONTACT/" .env
 fi
 
+logsdb_vars=("LOGSDB_HOST" "LOGSDB_DATABASE" "LOGSDB_USERNAME" "LOGSDB_PASSWORD")
+for var in "${logsdb_vars[@]}"
+do
+  if [ -n "${!var}" ]; then
+    echo "Setting ${var}"
+    sed -i "s/#${var}=.*/${var}=${!var}/" .env
+  fi
+done
+
 # start php7.1-fpm
 service php7.1-fpm start
 
