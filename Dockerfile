@@ -127,4 +127,6 @@ RUN chmod +x /docker-entrypoint.sh && ln -sf /dev/stderr /var/log/nginx/error.lo
 
 EXPOSE 80
 
+RUN mkdir -p /opt/dreamfactory/storage/framework/{sessions,views,cache} && chown www-data:www-data /opt/dreamfactory/storage/framework/{sessions,views,cache}
+
 CMD ["/docker-entrypoint.sh"]
